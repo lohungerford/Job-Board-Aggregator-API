@@ -2,7 +2,9 @@
 
 Public REST API that ingests Greenhouse job-board postings for a curated company list, normalizes and deduplicates them, and exposes search through a versioned, authenticated, rate-limited surface.
 
-Interactive docs: `/v1/docs` (Swagger) and `/v1/redoc`.
+Live demo: [`/v1/docs`](https://job-board-aggregator-api-ph0t.onrender.com/v1/docs) (Swagger) and [`/v1/redoc`](https://job-board-aggregator-api-ph0t.onrender.com/v1/redoc).
+
+> Note: Hosted on a free tier. First request may take 30-60 seconds to wake up if idle.
 
 ## Why this exists
 
