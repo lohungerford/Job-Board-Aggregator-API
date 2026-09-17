@@ -1,0 +1,41 @@
+name: Ingest Greenhouse jobs
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 */6 * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger secured ingestion endpoint
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          INTERNAL_INGEST_SECRET: ${{ secrets.INTERNAL_INGEST_SECRET }}
+        run: |
+          set -euo pipefail
+          if [ -z "${API_BASE_URL}" ] || [ -z "${INTERNAL_INGEST_SECRET}" ]; then
+            echo "API_BASE_URL and INTERNAL_INGEST_SECRET must be set as repository secrets." >&2
+            exit 1
+          fi
+          curl -fsS -X POST "${API_BASE_URL}/internal/ingest" \
+            -H "X-Internal-Secret: ${INTERNAL_INGEST_SECRET}" \
+            -H "Content-Type: application/json"
+
+  keepwarm:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/10 * * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping health endpoint to reduce free-tier cold starts
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${API_BASE_URL}" ]; then
+            echo "API_BASE_URL must be set as a repository secret." >&2
+            exit 1
+          fi
+          curl -fsS "${API_BASE_URL}/health"

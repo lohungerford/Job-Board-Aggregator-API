@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: job-board-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: INTERNAL_INGEST_SECRET
+        generateValue: true
+      - key: CORS_ALLOW_ORIGINS
+        value: "*"

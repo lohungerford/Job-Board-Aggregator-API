@@ -1,0 +1,16 @@
+.venv
+venv
+.git
+.github
+.pytest_cache
+.mypy_cache
+.ruff_cache
+__pycache__
+*.pyc
+.env
+tests
+.pytest.ini
+htmlcov
+.coverage
+README.md
+job-board-api-prd.md

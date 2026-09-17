@@ -1,0 +1,10 @@
+[
+  {"name": "Stripe", "greenhouse_board_token": "stripe", "is_active": true},
+  {"name": "GitLab", "greenhouse_board_token": "gitlab", "is_active": true},
+  {"name": "Discord", "greenhouse_board_token": "discord", "is_active": true},
+  {"name": "Airbnb", "greenhouse_board_token": "airbnb", "is_active": true},
+  {"name": "Cloudflare", "greenhouse_board_token": "cloudflare", "is_active": true},
+  {"name": "Databricks", "greenhouse_board_token": "databricks", "is_active": true},
+  {"name": "Figma", "greenhouse_board_token": "figma", "is_active": true},
+  {"name": "Notion", "greenhouse_board_token": "notion", "is_active": true}
+]
